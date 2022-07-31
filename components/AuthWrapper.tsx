@@ -19,6 +19,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
       {authRoutes.includes(router.pathname) ? (
         <ProtectedRoute>{children}</ProtectedRoute>
       ) : (
+				// 現在のページが、ログインを要求しないページだった場合
         children
       )}
     </>

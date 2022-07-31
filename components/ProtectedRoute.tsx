@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter(); // pageのURL
   const { status } = useSession(); // 認証情報が格納されている
 
-	// React のレンダリング後に実行する
+  // React のレンダリング後に実行する
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/auth/login');
@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   if (status === 'unauthenticated') return null;
 
-  return <>(children)</>;
+  return <>{children}</>;
 };
 
 export default ProtectedRoute;
