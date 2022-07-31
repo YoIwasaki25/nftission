@@ -11,7 +11,7 @@ const Header = () => {
             <div className="flex justify-center w-full font-extrabold text-white lg:w-1/2 lg:justify-start">
               <Link href="/">
                 <a className="text-2xl text-gray-900 no-underline hover:text-gray-900 hover:no-underline">
-                  🚀 &nbsp; <span className="text-gray-200 ">Nlog</span>
+                  🚀 &nbsp; <span className="text-gray-200 ">NFTission</span>
                 </a>
               </Link>
             </div>
