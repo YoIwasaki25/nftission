@@ -28,7 +28,7 @@ const login = ({
                       // 認証後のリダイレクト先をルートパスに設定
                       onClick={() =>
                         signIn(provider.id, {
-                          callbackUrl: '/',
+                          callbackUrl: '/articles',
                         })
                       }
                     >
