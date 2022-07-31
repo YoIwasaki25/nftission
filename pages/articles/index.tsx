@@ -1,4 +1,3 @@
-import { PrismaClientRustPanicError } from '@prisma/client/runtime';
 import { GetStaticProps } from 'next';
 // Prisma Client をインスタンス化したものを利用し、データベースからデータを取得する
 import prisma from '../../lib/prisma';
