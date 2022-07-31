@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
+import Router from 'next/router';
 import prisma from '../../lib/prisma';
 import { ArticleProps } from '../../types/Article';
 import { User } from '../../types/User';
@@ -23,10 +24,11 @@ const Article = (props: Props) => {
             // ブックマークされている場合はブックマーク削除ボタンを表示する
             <button
               type="button"
+              onClick={() => removeBookmark(props.article.id)}
               className="mt-5 inline-flex items-center rounded-lg bg-red-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-red-300 dark:bg-red-700 dark:focus:ring-red-800"
             >
               Remove Bookmark
-              <span className="ml-2 inline-flex h-4 w-4 items-center justifycenter rounded-full bg-red-200 text-xs font-semibold text-red-800">
+              <span className="ml-2 inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-200 text-xs font-semibold text-red-800">
                 {props.article.users.length}
               </span>
             </button>
@@ -34,6 +36,7 @@ const Article = (props: Props) => {
             // ブックマークされていない場合はブックマークするボタンを表示する
             <button
               type="button"
+              onClick={() => addBookmark(props.article.id)}
               className="mt-5 inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus: ring-blue-300 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Bookmark this article
@@ -83,3 +86,20 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return { props: { article, isBookmarked } };
 };
+
+async function addBookmark(id: number): Promise<void> {
+  await fetch(process.env.NEXT_PUBLIC_VERCEL_URL + `/api/bookmark/add/${id}`, {
+    method: 'PUT',
+  });
+  Router.push(`/articles/${id}`);
+}
+
+async function removeBookmark(id: number): Promise<void> {
+  await fetch(
+    process.env.NEXT_PUBLIC_VERCEL_URL + `/api/bookmark/remove/${id}`,
+    {
+      method: 'PUT',
+    }
+  );
+  Router.push(`/articles/${id}`);
+}
